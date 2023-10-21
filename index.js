@@ -11,13 +11,14 @@ const freelancers = [
 
 const randomFreelancerArray = [];
 
-function (){
-
+function getRandomFreelancer() {
+  const randomFreelancer =
+    freelancers[Math.floor(Math.random() * freelancers.length)];
+  return randomFreelancer;
 }
 
 function addFreelancer() {
-  const randomFreelancer =
-    freelancers[Math.floor(Math.random() * freelancers.length)];
+  const randomFreelancer = getRandomFreelancer();
   if (!randomFreelancerArray.includes(randomFreelancer)) {
     randomFreelancerArray.push(randomFreelancer);
     const table = document.querySelector(".freelancer-info");
