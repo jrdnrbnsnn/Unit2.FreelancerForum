@@ -17,14 +17,49 @@ function getRandomFreelancer() {
   return randomFreelancer;
 }
 
+function render() {
+  const randomFreelancer = getRandomFreelancer();
+  if (!randomFreelancerArray.includes(randomFreelancer)) {
+    randomFreelancerArray.push(randomFreelancer);
+    const table = document.querySelector(".freelancer-info tbody");
+
+    // Check if the table has a tbody element.
+    if (!table.querySelector("tbody")) {
+      const tbody = document.createElement("tbody");
+      table.appendChild(tbody);
+    }
+
+    const newRow = table.insertRow(-1);
+    newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
+
+    updateAveragePrice();
+  }
+}
+
 function addFreelancer() {
   const randomFreelancer = getRandomFreelancer();
   if (!randomFreelancerArray.includes(randomFreelancer)) {
     randomFreelancerArray.push(randomFreelancer);
-    const table = document.querySelector(".freelancer-info");
+    const table = document.querySelector(".freelancer-info tbody");
     const newRow = table.insertRow(-1);
     newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
+    updateAveragePrice();
+    console.log(randomFreelancerArray);
   }
 }
 
+function updateAveragePrice() {
+  const averagePriceElement = document.querySelector(".average-price");
+  const total = randomFreelancerArray.reduce((sum, freelancer) => {
+    if (typeof freelancer.price === "number") {
+      sum += freelancer.price;
+    }
+    return sum;
+  }, 0);
+  const average = total / randomFreelancerArray.length;
+  averagePriceElement.textContent = average;
+}
+
+render();
+render();
 setInterval(addFreelancer, 3000);
