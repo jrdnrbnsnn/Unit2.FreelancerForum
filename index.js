@@ -35,6 +35,11 @@ function addFreelancer() {
     const newRow = table.insertRow(-1);
     newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
     updateAveragePrice();
+    if (randomFreelancerArray.length === freelancers.length) {
+      {
+        clearInterval(addFreelancerIntervalID);
+      }
+    }
   }
 }
 
@@ -51,4 +56,4 @@ function updateAveragePrice() {
 }
 
 render();
-setInterval(addFreelancer, 3000);
+const addFreelancerIntervalID = setInterval(addFreelancer, 1000);
