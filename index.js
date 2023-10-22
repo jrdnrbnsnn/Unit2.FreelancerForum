@@ -9,14 +9,17 @@ const freelancers = [
   { name: "Prof. Goose", price: 72, occupation: "driver" },
 ];
 
+// creates random Freelancer Array to push when generating random frelancers
 const randomFreelancerArray = [];
 
+// gets Random free lancer
 function getRandomFreelancer() {
   const randomFreelancer =
     freelancers[Math.floor(Math.random() * freelancers.length)];
   return randomFreelancer;
 }
 
+// to initialize array with 2 starting freelancers. is called twice in code
 function render() {
   const randomFreelancer = getRandomFreelancer();
   if (!randomFreelancerArray.includes(randomFreelancer)) {
@@ -29,6 +32,7 @@ function render() {
       table.appendChild(tbody);
     }
 
+    // Inserts new table tow and adds info
     const newRow = table.insertRow(-1);
     newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
 
