@@ -21,22 +21,9 @@ function getRandomFreelancer() {
 
 // to initialize array with 2 starting freelancers. is called twice in code
 function render() {
-  const randomFreelancer = getRandomFreelancer();
-  if (!randomFreelancerArray.includes(randomFreelancer)) {
-    randomFreelancerArray.push(randomFreelancer);
-    const table = document.querySelector(".freelancer-info tbody");
-
-    // Check if the table has a tbody element.
-    if (!table.querySelector("tbody")) {
-      const tbody = document.createElement("tbody");
-      table.appendChild(tbody);
-    }
-
-    // Inserts new table tow and adds info
-    const newRow = table.insertRow(-1);
-    newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
-
-    updateAveragePrice();
+  // runs through loop twice to get initial freelancer data
+  for (let step = 0; step < 2; step++) {
+    addFreelancer();
   }
 }
 
@@ -48,7 +35,6 @@ function addFreelancer() {
     const newRow = table.insertRow(-1);
     newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
     updateAveragePrice();
-    console.log(randomFreelancerArray);
   }
 }
 
@@ -61,9 +47,8 @@ function updateAveragePrice() {
     return sum;
   }, 0);
   const average = total / randomFreelancerArray.length;
-  averagePriceElement.textContent = average;
+  averagePriceElement.textContent = average.toFixed(2);
 }
 
-render();
 render();
 setInterval(addFreelancer, 3000);
