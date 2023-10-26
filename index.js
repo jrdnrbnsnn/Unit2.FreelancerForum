@@ -32,8 +32,20 @@ function addFreelancer() {
   if (!randomFreelancerArray.includes(randomFreelancer)) {
     randomFreelancerArray.push(randomFreelancer);
     const table = document.querySelector(".freelancer-info tbody");
-    const newRow = table.insertRow(-1);
-    newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
+    const newRow = document.createElement("tr");
+    const name = document.createElement("td");
+    name.textContent = randomFreelancer.name;
+
+    const occupation = document.createElement("td");
+    occupation.textContent = randomFreelancer.occupation;
+
+    const price = document.createElement("td");
+    price.textContent = randomFreelancer.price;
+
+    newRow.replaceChildren(name, occupation, price);
+    table.appendChild(newRow);
+
+    // newRow.innerHTML = `<td>${randomFreelancer.name}</td><td>${randomFreelancer.occupation}</td><td>${randomFreelancer.price}</td>`;
     updateAveragePrice();
     if (randomFreelancerArray.length === freelancers.length) {
       {
